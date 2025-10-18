@@ -28,3 +28,19 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 
+//Exercise 3
+window.addEventListener('DOMContentLoaded', () => {
+    const board = document.getElementById('board');
+    const squares = board.querySelectorAll('div');
+
+    squares.forEach(square => {
+        square.addEventListener('mouseenter', () => {
+            square.classList.add('hover');
+        });
+
+        square.addEventListener('mouseleave', () => {
+            square.classList.remove('hover');
+        });
+    });
+});
+  
