@@ -26,7 +26,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 square.classList.add(activePlayer);
 
                 gameState[index] = activePlayer;
-                
+
                 checkWin();
 
                 activePlayer = activePlayer === 'X' ? 'O': 'X';
@@ -70,3 +70,25 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+//Exercise 5
+window.addEventListener('DOMContentLoaded', () => {
+    const newGameButton = document.querySelector('.btn');
+    const board = document.getElementById('board');
+    const squares = board.querySelectorAll('div');
+    const status = document.getElementById('status');
+
+    newGameButton.addEventListener('click', () => {
+
+        // Clear all squares
+        squares.forEach(square => {
+            square.textContent = '';
+            square.classList.remove('X', 'O');
+});
+
+
+        // Reset status message
+        status.textContent = 'Move your mouse over a square and click to play an X or an O.';
+        status.classList.remove('you-won');
+    });
+});
