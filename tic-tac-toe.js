@@ -14,17 +14,43 @@ window.addEventListener('DOMContentLoaded', () => {
     const squares = board.querySelectorAll('div');
     let activePlayer = 'X';
 
-    squares.forEach(square => {
+    //Exercise 4
+     let gameState = ['', '', '', '', '', '', '', '', ''];
+
+    squares.forEach((square, index) => {
         square.classList.add('square');
 
         square.addEventListener('click', () => {
             if (!square.textContent) {
                 square.textContent = activePlayer;
                 square.classList.add(activePlayer);
+
+                gameState[index] = activePlayer;
+                
+                checkWin();
+
                 activePlayer = activePlayer === 'X' ? 'O': 'X';
             }
         });
     });
+
+function checkWin() {
+        const win = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8], //horizontal win
+            [0, 3, 6], [1, 4, 7], [2, 5, 8], //vertical win
+            [0, 4, 8], [2, 4, 6]   //diagobal win
+        ];
+
+        for (const pattern of win) {
+            const [a, b, c] = pattern;
+            if (gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c]) {
+                const status = document.getElementById('status');
+                status.textContent = `Congratulations! ${gameState[a]} is the Winner!`;
+                status.classList.add('you-won');
+                return;
+            }
+        }
+    }
 });
 
 
@@ -43,4 +69,4 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-  
+
