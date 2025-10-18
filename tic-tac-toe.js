@@ -17,23 +17,29 @@ window.addEventListener('DOMContentLoaded', () => {
     //Exercise 4
      let gameState = ['', '', '', '', '', '', '', '', ''];
 
+    const newButton = document.querySelector('.btn');//Exercise 6
+    let gameOver = false;
+
+
     squares.forEach((square, index) => {
         square.classList.add('square');
 
         square.addEventListener('click', () => {
+            //these conditions hinder altering squares that already have an X or O
             if (!square.textContent) {
                 square.textContent = activePlayer;
                 square.classList.add(activePlayer);
 
                 gameState[index] = activePlayer;
 
-                checkWin();
+                checkWin(); //Exercise 4
 
                 activePlayer = activePlayer === 'X' ? 'O': 'X';
             }
         });
     });
 
+    //Exercise 4 function
 function checkWin() {
         const win = [
             [0, 1, 2], [3, 4, 5], [6, 7, 8], //horizontal win
@@ -47,10 +53,17 @@ function checkWin() {
                 const status = document.getElementById('status');
                 status.textContent = `Congratulations! ${gameState[a]} is the Winner!`;
                 status.classList.add('you-won');
+                gameOver = true; //Exercise 6
                 return;
             }
         }
     }
+    
+    newGameButton.addEventListener('click', () => {
+        gameState = ['', '', '', '', '', '', '', '', ''];
+        activePlayer = 'X';
+        gameOver = false;
+    });
 });
 
 
@@ -92,3 +105,7 @@ window.addEventListener('DOMContentLoaded', () => {
         status.classList.remove('you-won');
     });
 });
+
+
+
+
